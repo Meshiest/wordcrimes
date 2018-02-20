@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Word Crimes</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <script src="https://rawgit.com/lodash/lodash/4.17.4/dist/lodash.min.js"></script>
+    <script src="js/word2vecutils.js"></script>
+    <script src="js/app.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <content id="content">
+      <div class="flex-grow">
+        <div class="word-container">
+          <div class="container info-panel">
+            <div class="row">
+              <div class="box">
+                <a class="button" href="javascript:showPopUp()"><img src="img/gear.png" height="70%" width="40%"></a>
+              </div>
+              <h1 class="header">Word Crimes</h1>
+              <div class="score-container">
+                <div class="score-box">
+                  <div class="title">Misses</div>
+                  <div class="score">
+                    <span id="numMisses">0</span>/<span id="maxMisses">3</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <p>
+                You are a detective in the field and the only resource you have is an AI that is trained to connect clues to the crime. Your task is to find the right word associations among a grid of words using hints given by the AI. If you guess the wrong words too many times, you won't have accurate enough clues to solve the case.
+              </p>
+            </div>
+          </div>
+          <div class="container">
+            <button onclick="clickStartGame()">New Game</button>
+          </div>
+          <div class="clue-split">
+            <div class="clue-column">
+              <h2>Words</h2>
+              <div class="word-scroll">
+                <div class="word-list" id="words">
+                  <!--<div class="word miss">apple</div>
+                  <div class="word hit">banana</div>
+                  <div class="word">zebra</div>-->
+                </div>
+              </div>
+            </div>
+            <div class="clue-column">
+              <h2>Clues</h2>
+              <div class="clue-block" id="clues">
+                <div class="clue">
+                  <!-- <span class="num">3</span> - <span class="word">Color</span> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <footer>
+        <div class="container">
+          Totally footer
+        </div>
+      </footer> -->
+    </content>
+    <div class="overlay" id="loadingOverlay">
+      <div>Generating Game...</div>
+      <div class="subhead">Please wait a moment</div>
+    </div>
+    <div class="overlay" id="loosingOverlay" style="display: none;">
+      <div> Sorry you lose! </div>
+      <div class="subhead">If you want to play again please click "New Game" </div>
+      <div class="container">
+        <button onclick="clickStartGame()">New Game</button>
+      </div>
+    </div>
+    <div class="overlay" id="winningOverlay" style="display: none;">
+      <div> Congratulations, you win! </div>
+      <div class="container">
+        <button onclick="clickStartGame()">Play Again!</button>
+      </div>
+    </div>
+
+    <div id="popup1" class="settingsOver">
+      <div class="popup">
+        <h2>Settings</h2>
+        <a class="close" href="javascript:closePopUp()">&times;</a>
+        <div class="settingsContent">
+          Adjust the difficulty, change the mode, or change the amount of words!
+          <!-- Issac make this prettier !-->
+          <br>
+          <div>
+            <h3>Change the difficulty:</h3>
+            <select id="diff">
+              <option value="easy" selected="selected">Easy</option>
+              <option value="normal">Normal</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <br>
+          <div>
+            <h3>Change the amount of words:</h3>
+            <select id="amountOfWords">
+              <option value="1000">1000</option>
+              <option value="5000">5000</option>
+              <option value="10000">10000</option>
+              <option value="25000">25000</option>
+              <option value="complex">Complex Dictionary</option>
+            </select>
+          </div>
+          <br>
+          <!-- <div>
+            <h3>Change the mode:</h3>
+            <select id="mode">
+              <option value="normal">Normal</option>
+              <option value="sat">SAT</option>
+            </select>
+          </div> -->
+
+          <div class="settingsContainer">
+            <button onclick="adjustSettings()">Reset the game with these settings!</button>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
